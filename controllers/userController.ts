@@ -1,20 +1,24 @@
 import { Request, Response, NextFunction } from 'express';
 import * as userService from '../services/userService.js';
 import jwt from 'jsonwebtoken';
+import { User } from '../models/User.js';
+import dotenv from "dotenv"
 
-const JWT_SECRET = 'your_jwt_secret'; // In production, use environment variables
+dotenv.config();
 
-export const register = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
+const JWT_SECRET = process.env.JWT_SECRET;
+
+export const register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { username, password } = req.body;
-    const user = await userService.createUser(username, password);
+    const user: User = await userService.createUser(username, password);
     res.json({ id: user.id, username: user.username });
   } catch (error) {
     next(error);
   }
 };
 
-export const login = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
+export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { username, password } = req.body;
     const user = await userService.authenticateUser(username, password);
