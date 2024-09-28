@@ -8,5 +8,5 @@ export const getUsers = async (): Promise<User[]> => {
 };
 
 export const saveUsers = async (users: User[]): Promise<void> => {
-  await jsonfile.writeFile(file, users, { spaces: 2 });
+  await jsonfile.writeFile(file, users);
 };

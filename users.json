@@ -1,6 +1,8 @@
 [
   {
-    "id": 1,
-    "passwordHash": "$2b$10$ou1p2V3HpijrEMJORIxPHeXNZiozbQEf8iAtkIv4O4E00xb72i1Ou"
+    "id": "08056df5-8cb9-4d21-8b85-c263d13dd3ad",
+    "username": "elad",
+    "passwordHash": "$2b$10$faOk1uoCyudQwyJhZgkDoeAKE3TC.mYw59COxAmTWnU/PBofk9ZPW",
+    "token": "e13a307a-9784-4c3c-b22d-71ea2208e36a"
   }
 ]

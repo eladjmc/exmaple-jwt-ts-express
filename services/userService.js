@@ -9,13 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { getUsers, saveUsers } from '../dal/userDAL.js';
 import bcrypt from 'bcrypt';
+import { v4 as uuid4 } from 'uuid';
 export const createUser = (username, password) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield getUsers();
     const passwordHash = yield bcrypt.hash(password, 10);
     const newUser = {
-        id: users.length + 1,
+        id: uuid4(),
         username,
         passwordHash,
+        token: null, // field
     };
     users.push(newUser);
     yield saveUsers(users);
@@ -28,4 +30,17 @@ export const authenticateUser = (username, password) => __awaiter(void 0, void 0
         return user;
     }
     return null;
+});
+export const updateUserToken = (userId, token) => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield getUsers();
+    const userIndex = users.findIndex(u => u.id === userId);
+    if (userIndex !== -1) {
+        users[userIndex].token = token;
+        yield saveUsers(users);
+    }
+});
+export const getUserByToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield getUsers();
+    const user = users.find(u => u.token === token);
+    return user || null;
 });

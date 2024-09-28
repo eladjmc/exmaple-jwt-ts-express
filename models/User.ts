@@ -1,6 +1,7 @@
 export interface User {
-    id: number;
+    id: string;
     username: string;
     passwordHash: string;
+    token: string | null;
   }
   

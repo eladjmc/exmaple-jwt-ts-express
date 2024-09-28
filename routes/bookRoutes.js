@@ -1,3 +1,4 @@
+// src/routes/bookRoutes.ts
 import express from 'express';
 import * as bookController from '../controllers/bookController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
